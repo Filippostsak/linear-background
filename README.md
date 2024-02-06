@@ -1,2 +1,3 @@
 # linear-background
-background-code-generator
+
+background-code-generator with jquery

@@ -1,40 +1,41 @@
-let css = document.querySelector("h3");
-let color1 = document.querySelector(".color1");
-let color2 = document.querySelector(".color2");
-let body = document.getElementById("gradient");
-let randomButton = document.getElementById("randomButton");
-let button = document.querySelector("button");
-let input = document.querySelectorAll("input");
+$(document).ready(function () {
+  const css = $("h3");
+  const color1 = $(".color1");
+  const color2 = $(".color2");
+  const body = $("#gradient");
+  const randomButton = $("#randomButton");
+  const button = $("button");
+  const input = $("input");
 
-color1.addEventListener("input", setGradient);
-color2.addEventListener("input", setGradient);
-randomButton.addEventListener("click", generateRandomColors);
+  color1.on("input", setGradient);
+  color2.on("input", setGradient);
+  randomButton.on("click", generateRandomColors);
 
-generateRandomColors();
+  generateRandomColors();
 
-function setGradient() {
-  body.style.background =
-    "linear-gradient(to right, " + color1.value + ", " + color2.value + ")";
-  css.textContent = body.style.background + ";";
-  button.style.background =
-    "linear-gradient(to right, " + color1.value + ", " + color2.value + ")";
-}
-
-function generateRandomColors() {
-  let randomColor1 = getRandomColor();
-  let randomColor2 = getRandomColor();
-
-  color1.value = randomColor1;
-  color2.value = randomColor2;
-
-  setGradient();
-}
-
-function getRandomColor() {
-  let letters = "0123456789ABCDEF";
-  let color = "#";
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+  function setGradient() {
+    const gradient = `linear-gradient(to right, ${color1.val()}, ${color2.val()})`;
+    body.css("background", gradient);
+    css.text(gradient + ";");
+    button.css("background", gradient);
   }
-  return color;
-}
+
+  function generateRandomColors() {
+    const randomColor1 = getRandomColor();
+    const randomColor2 = getRandomColor();
+
+    color1.val(randomColor1);
+    color2.val(randomColor2);
+
+    setGradient();
+  }
+
+  function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+});
